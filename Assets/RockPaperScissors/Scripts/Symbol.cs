@@ -15,6 +15,9 @@ public class Symbol : MonoBehaviour
     [SerializeField]
     private Material[] materials;
 
+    [SerializeField]
+    private ParticleSystem bloodParticles;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,12 +50,15 @@ public class Symbol : MonoBehaviour
         if(enemy != null) {
             Debug.Log(currentSymbol + " : " + enemy.currentSymbol);
 
-            // TODO: Dodìlat Beats v RPSExtensions, který bude vracet bool?
-            /*
-            if(currentSymbol.Beats(enemy)) {
-
+            var wouldWin = currentSymbol.Beats(enemy.currentSymbol);
+            if(wouldWin.HasValue) {
+                if(wouldWin.Value) {
+                    var parts = Instantiate(bloodParticles, enemy.transform.position, Quaternion.Euler(-90, 0, 0));
+                    parts.Emit(100);
+                    Destroy(parts.gameObject, 2f);
+                    Destroy(enemy.gameObject);
+                }
             }
-            */
         }
     }
 }

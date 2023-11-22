@@ -806,6 +806,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 10af4d3377501754d8fbeeb8e796a981, type: 2}
   - {fileID: 2100000, guid: c1339fbaf0d6d1e48ac035e89dee469b, type: 2}
   - {fileID: 2100000, guid: 6736be35ef54dfb4b8360a2760b9f4bf, type: 2}
+  bloodParticles: {fileID: 7220632667615646027, guid: f1902e2f6256cf8459c0aec4d3cdd547, type: 3}
 --- !u!195 &1675946813
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -937,6 +938,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 10af4d3377501754d8fbeeb8e796a981, type: 2}
   - {fileID: 2100000, guid: c1339fbaf0d6d1e48ac035e89dee469b, type: 2}
   - {fileID: 2100000, guid: 6736be35ef54dfb4b8360a2760b9f4bf, type: 2}
+  bloodParticles: {fileID: 7220632667615646027, guid: f1902e2f6256cf8459c0aec4d3cdd547, type: 3}
 --- !u!54 &1959027017
 Rigidbody:
   m_ObjectHideFlags: 0
