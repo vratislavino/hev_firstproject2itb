@@ -7,7 +7,11 @@ public class Symbol : MonoBehaviour
     [SerializeField]
     private bool isPlayer;
 
+    public bool IsPlayer => isPlayer;
+
     SymbolEnum currentSymbol;
+
+    public SymbolEnum CurrentSymbol => currentSymbol;
 
     [SerializeField]
     private MeshRenderer quad;

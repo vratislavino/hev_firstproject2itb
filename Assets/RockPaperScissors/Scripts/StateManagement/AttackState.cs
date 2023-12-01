@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackState : MonoBehaviour
+public class AttackState : State
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public AttackState(Symbol player, Symbol enemy) : base(player, enemy) {
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public override void InitState() {
+        throw new System.NotImplementedException();
+    }
+
+    public override State TryToChangeState() {
+        throw new System.NotImplementedException();
+    }
+
+    public override void Update() {
+        throw new System.NotImplementedException();
     }
 }
