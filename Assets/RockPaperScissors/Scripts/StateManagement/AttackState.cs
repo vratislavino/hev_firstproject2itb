@@ -6,14 +6,26 @@ public class AttackState : State
     }
 
     public override void InitState() {
-        throw new System.NotImplementedException();
-    }
-
-    public override State TryToChangeState() {
-        throw new System.NotImplementedException();
     }
 
     public override void Update() {
-        throw new System.NotImplementedException();
+        agent.SetDestination(playerSymbol.transform.position);
     }
+
+    public override State TryToChangeState() {
+        if (Vector3.Distance(enemySymbol.transform.position, playerSymbol.transform.position) > 15f)
+            return new IdleState(playerSymbol, enemySymbol);
+
+        var res = enemySymbol.CurrentSymbol.Beats(playerSymbol.CurrentSymbol);
+
+        if (res.HasValue) {
+            if (res.Value)
+                return null;
+            else
+                return new FleeState(playerSymbol, enemySymbol);
+        } else {
+            return new IdleState(playerSymbol, enemySymbol);
+        }
+    }
+
 }
