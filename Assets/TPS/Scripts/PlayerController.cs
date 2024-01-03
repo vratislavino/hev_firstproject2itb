@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] float sensitivity;
     [SerializeField] float speed;
+    [SerializeField] float jumpForce;
 
     Rigidbody rb;
 
@@ -33,14 +34,19 @@ public class PlayerController : MonoBehaviour
     private void DoMovement() {
         float side = Input.GetAxis("Horizontal"); // od -1 do 1
         float forward = Input.GetAxis("Vertical");
+        float yMovement = rb.velocity.y;
 
-        /* NEXT TIME :)
+        if (Input.GetButtonDown("Jump"))
+        {
+            yMovement = jumpForce;
+        }
+
+
         var dir = new Vector3(side, 0, forward);
         var transformedDir = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0) * dir;
         
-
-        rb.velocity = new Vector3(transformedDir.x * speed, 0, transformedDir.z * speed);
-        */
+        rb.velocity = new Vector3(transformedDir.x * speed, yMovement, transformedDir.z * speed);
+        
     }
 
     private void DoRotation() {
