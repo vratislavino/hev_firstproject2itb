@@ -9,6 +9,15 @@ public abstract class RangedWeapon : Weapon
     protected int currentAmmo;
 
     [SerializeField]
+    protected float fireRate;
+    protected float fireCooldown;
+
+    [SerializeField]
+    protected float reloadTime;
+    protected float reloadProgress;
+
+
+    [SerializeField]
     protected Rigidbody bulletPrefab;
 
     [SerializeField]
@@ -17,20 +26,27 @@ public abstract class RangedWeapon : Weapon
     protected override void Start()
     {
         base.Start();
+        ControlFunction = Input.GetButtonDown;
         currentAmmo = maxAmmo;
     }
 
     public override void Attack()
     {
-        if(currentAmmo > 0) {
+        if(currentAmmo > 0 && fireCooldown <= 0) {
             Shoot();
+            fireCooldown = fireRate;
             currentAmmo--;
         }
     }
 
+    private void Update()
+    {
+        fireCooldown -= Time.deltaTime;   
+    }
+
     protected virtual void Shoot()
     {
-        var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+        var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
         bullet.AddForce(bullet.transform.forward * 100, ForceMode.Impulse);
         Destroy(bullet.gameObject, 4);
     }

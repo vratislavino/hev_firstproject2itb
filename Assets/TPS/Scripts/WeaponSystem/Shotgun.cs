@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Shotgun : RangedWeapon
 {
-    // Start is called before the first frame update
-    void Start()
+    private int bulletCount = 8;
+    private float spread = 5;
+
+    protected override void Shoot()
     {
-        
+        for (int i = 0; i < bulletCount; i++)
+        {
+            var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+            bullet.transform.Rotate(Random.Range(-spread, spread), Random.Range(-spread, spread), 0, Space.Self);
+            bullet.AddForce(bullet.transform.forward * 100, ForceMode.Impulse);
+            Destroy(bullet.gameObject, 4);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
