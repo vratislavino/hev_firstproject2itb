@@ -39,6 +39,11 @@ public abstract class RangedWeapon : Weapon
         }
     }
 
+    public override float GetReloadProgress()
+    {
+        return reloadProgress / reloadTime;
+    }
+
     private void Update()
     {
         if(reloadProgress > 0)
@@ -46,12 +51,14 @@ public abstract class RangedWeapon : Weapon
             reloadProgress -= Time.deltaTime;
             if(reloadProgress <= 0) {
                 currentAmmo = maxAmmo;
+                RaisePossibleToAttackChanged(true);
             }
         }
 
         if(Input.GetButtonDown("Reload"))
         {
             reloadProgress = reloadTime;
+            RaisePossibleToAttackChanged(false);
         }
 
         fireCooldown -= Time.deltaTime;   
