@@ -41,6 +41,19 @@ public abstract class RangedWeapon : Weapon
 
     private void Update()
     {
+        if(reloadProgress > 0)
+        {
+            reloadProgress -= Time.deltaTime;
+            if(reloadProgress <= 0) {
+                currentAmmo = maxAmmo;
+            }
+        }
+
+        if(Input.GetButtonDown("Reload"))
+        {
+            reloadProgress = reloadTime;
+        }
+
         fireCooldown -= Time.deltaTime;   
     }
 
