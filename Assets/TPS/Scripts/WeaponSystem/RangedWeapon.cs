@@ -32,7 +32,7 @@ public abstract class RangedWeapon : Weapon
 
     public override void Attack()
     {
-        if(currentAmmo > 0 && fireCooldown <= 0) {
+        if(currentAmmo > 0 && fireCooldown <= 0 && reloadProgress <= 0) {
             Shoot();
             fireCooldown = fireRate;
             currentAmmo--;
@@ -69,5 +69,10 @@ public abstract class RangedWeapon : Weapon
         var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
         bullet.AddForce(bullet.transform.forward * 100, ForceMode.Impulse);
         Destroy(bullet.gameObject, 4);
+    }
+
+    public override void ResetReloadProgress()
+    {
+        reloadProgress = reloadTime;
     }
 }

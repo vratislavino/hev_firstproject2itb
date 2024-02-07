@@ -31,12 +31,18 @@ public class WeaponController : MonoBehaviour
         if(currentWeapon != null)
         {
             currentWeapon.PossibleToAttackChanged -= OnPossibleToAttackChanged;
+            if(currentWeapon.GetReloadProgress() > 0)
+            {
+                currentWeapon.ResetReloadProgress();
+            }
             currentWeapon.gameObject.SetActive(false);
         }
 
         currentWeapon = weapon;
         currentWeapon.PossibleToAttackChanged += OnPossibleToAttackChanged;
         currentWeapon.gameObject.SetActive(true);
+
+        OnPossibleToAttackChanged(currentWeapon.GetReloadProgress() <= 0);
     }
 
     private void OnPossibleToAttackChanged(bool isPossible)

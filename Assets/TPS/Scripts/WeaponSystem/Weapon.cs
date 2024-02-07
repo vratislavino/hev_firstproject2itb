@@ -19,11 +19,12 @@ public abstract class Weapon : MonoBehaviour
         PossibleToAttackChanged?.Invoke(possibleToAttack);
     }
 
-
     public abstract void Attack();
 
     protected virtual void Start()
     {
         
     }
+
+    public virtual void ResetReloadProgress() { }
 }
