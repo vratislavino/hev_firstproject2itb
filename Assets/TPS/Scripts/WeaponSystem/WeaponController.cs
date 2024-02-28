@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 public class WeaponController : MonoBehaviour
@@ -19,6 +20,12 @@ public class WeaponController : MonoBehaviour
     [SerializeField]
     private Image reloadImage;
 
+    [SerializeField]
+    private Grenade grenadePrefab;
+    [SerializeField]
+    private Transform grenadeThrowPosition;
+    [SerializeField]
+    private Transform cameraRef;
     private void Start()
     {
         weapons = GetComponentsInChildren<Weapon>(true).ToList();
@@ -64,8 +71,23 @@ public class WeaponController : MonoBehaviour
             reloadImage.fillAmount = currentWeapon.GetReloadProgress();
         }
 
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            ThrowGrenade();
+        }
+
         if (Input.GetKeyDown(KeyCode.Alpha1)) ChangeWeapon(weapons.ElementAt(0));
         if (Input.GetKeyDown(KeyCode.Alpha2)) ChangeWeapon(weapons.ElementAt(1));
         if (Input.GetKeyDown(KeyCode.Alpha3)) ChangeWeapon(weapons.ElementAt(2));
+    }
+
+    private void ThrowGrenade()
+    {
+        //var rot = 
+
+        var g = Instantiate(grenadePrefab, grenadeThrowPosition.position, cameraRef.rotation);
+        var rb = g.GetComponent<Rigidbody>();
+        g.transform.Rotate(Vector3.right, 45, Space.Self);
+        rb.AddForce(g.transform.forward * 100, ForceMode.Impulse);
     }
 }
